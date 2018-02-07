@@ -1,16 +1,22 @@
 var path = require('path')
 var webpack = require('webpack')
-
+var env = process.env.NODE_ENV
+const DEV = 'development'
+var DEV_ENTRY = './src/main.js'
+var BUILD_ENTRY = './src/lib/index.js'
+console.log('当前环境:', env)
+console.log('env === DEV', env === DEV)
 module.exports = {
   // 开发入口
   // entry: './src/main.js',
   // 发布入口
-  entry: './src/lib/index.js',
+  // entry: './src/lib/index.js',
+  entry: env === DEV ? DEV_ENTRY : BUILD_ENTRY,
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'zb-vue-components.js',
-    library: 'ZbVueComponents', // library指定的就是你使用require时的模块名，这里便是require("PayKeyboard")
+    filename: 'zb-ui.js',
+    library: 'zb-ui', // library指定的就是你使用require时的模块名，这里便是require("PayKeyboard")
     libraryTarget: 'umd', //libraryTarget会生成不同umd的代码，例如可以只是commonjs标准的，也可以是指amd标准的，也可以只是通过script标签引入的。
     umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define。
   },
