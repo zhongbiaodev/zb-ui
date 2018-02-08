@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <button @click="show = !show">打开筛选器</button>
+    <button @click="show1 = !show1">多选控件-动画-侧滑</button>
+    <button @click="show2 = !show2">多选控件无动画</button>
     <multiple-select
-      @on-close="show = !show"
+      @on-close="show1 = !show1"
       :animate="true"
-      :show="show"></multiple-select>
+      :show="show1"></multiple-select>
+    <multiple-select
+      @on-close="show2 = !show2"
+      :animate="false"
+      :show="show2"></multiple-select>
   </div>
 </template>
 
@@ -14,7 +19,8 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      show: false
+      show1: false,
+      show2: false
     }
   }
 }
