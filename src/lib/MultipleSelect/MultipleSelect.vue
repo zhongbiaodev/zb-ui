@@ -196,7 +196,8 @@ export default {
         overflow-x: hidden;
     }
     .multiple-select-item {
-        background-color: #eff2f7;
+        background-color: $color-tag-bg;
+        color: $color-multiple-text;
         padding: 0 10px;
         display: inline-block;
         font-size: 14px;
@@ -208,8 +209,8 @@ export default {
         border-radius: 5px;
     }
     .multiple-select-item.selected {
-        background-color: #4182eb;
-        color: #fff;
+        background-color: $color-main;
+        color: $color-text-selected;
     }
     .multiple-select-footer {
         display: flex;

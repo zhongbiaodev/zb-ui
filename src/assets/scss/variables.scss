@@ -1,27 +1,50 @@
+// 通用颜色
+// 通过理解ui设计而来
 // 主色
 $color-main : #4182eb;
+// 主背景色
 $color-bg : #efeff4;
-// 链接
-$color-link-info : $color-main; // 蓝色链接
-$color-link-warn : #ff7a3f;     // 红色链接
-// 激活和未激活
-$color-tab-active : $color-main;
-$color-tab-normal : #858e9c;
-// 标题和副标题
-$color-title : #19192d;
-$color-subtitle : #576b95;
-// 星星的亮暗
-$color-star-dark : #ddd;
-$color-star-light : #ffb901;
-// 监控中
-$color-monitoring : #ff7a3f;
-$color-monitor : #576b95;
-// Tag
-$color-tag-normal : #576b95;
-$color-tag-normal-bg : rgba(224,230,237,0.48);
-$color-tag-light : #ff4e00;
-$color-tag-light-bg : rgba(247,224,215,0.55);
+// 主高亮色
+$color-highlight : #ff7a3f;
+// 列表标题色
+$color-list-title : #19192d;
+// 辅助色-副标题颜色
+$color-auxiliary: #3a3d48;
+// 辅助信息色-提示色
+$color-auxiliary-info : #576b95;
+// 输入框提示色
+$color-placeholder : #afbacd;
+// 正文标题色-正文颜色
+$color-detail-title: #19192d;
+// 常态文字颜色
+$color-text-normal : #858e9d;
+$color-text-selected : #ffffff;
+// 0.5px边框颜色
+$color-border : #e0e6ed;
 // 遮罩层颜色
 $color-mask : rgba(0,0,0,.6);
-// 0.5px边框颜色
-$color-border : #d9d9d9;
+// 普通标签常态背景
+$color-tag-bg : #eff2f7;
+// 副标题颜色
+$color-subtitle : $color-auxiliary;
+// 正文颜色
+$color-detail-content: $color-detail-title;
+// 键值对颜色
+$color-label : $color-text-normal;
+$color-value : $color-detail-title;
+// 激活和未激活
+$color-tab-active : $color-main;
+$color-tab-normal : $color-text-normal;
+
+// ////////////////////////////
+// 产品颜色
+// 根据产品需要派生出来的颜色
+// ////////////////////////////
+// 星星的亮暗
+$color-star-dark : #dddddd;
+$color-star-light : #ffb901;
+// 链接
+$color-link-info : $color-main;      // 蓝色链接
+$color-link-warn : $color-highlight; // 红色链接
+// 标签 Tag
+$color-multiple-text: $color-list-title;
