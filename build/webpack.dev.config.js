@@ -52,7 +52,10 @@ module.exports = {
                                 loader: 'sass-resources-loader',
                                 options: {
                                     // 需更改为项目中实际scss文件路径
-                                    resources: path.resolve(__dirname, '../src/assets/scss/variables.scss'),
+                                    resources: [
+                                        path.resolve(__dirname, '../src/assets/scss/variables.scss'),
+                                        path.resolve(__dirname, '../src/assets/scss/common.scss'),
+                                    ],
                                 },
                             },
                         ],
@@ -64,7 +67,10 @@ module.exports = {
                                 loader: 'sass-resources-loader',
                                 options: {
                                     // 需更改为项目中实际scss文件路径
-                                    resources: path.resolve(__dirname, '../src/assets/scss/variables.scss'),
+                                    resources: [
+                                        path.resolve(__dirname, '../src/assets/scss/variables.scss'),
+                                        path.resolve(__dirname, '../src/assets/scss/common.scss'),
+                                    ],
                                 },
                             },
                         ]

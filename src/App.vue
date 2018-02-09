@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <button @click="show1 = !show1">多选控件-动画-侧滑</button>
-    <button @click="show2 = !show2">多选控件无动画</button>
+    <button class="mt10" @click="show2 = !show2">多选控件无动画</button>
     <multiple-select
       @on-close="show1 = !show1"
       :animate="true"

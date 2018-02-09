@@ -1,0 +1,71 @@
+// 0.5高度的边框
+@mixin thin-border ($top-bottom, $left:0) {
+    position: relative;
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: #{$left}px;
+        right: 0;
+        #{$top-bottom}: 0;
+        border-bottom: 1px solid $color-border;
+        transform: scaleY(.5);
+    }
+}
+
+// //////////
+// 原子类
+// //////////
+// 间隔
+$class-list: 
+    mt margin-top,
+    mr margin-right,
+    mb margin-bottom,
+    ml margin-left,
+    pt padding-top,
+    pr padding-right,
+    pb padding-bottom,
+    pl padding-left
+;
+$nums: 5 10 15 20 30 40 50 60 70 80 90 100;
+@each $name, $prop in $class-list {
+    @each $n in $nums {
+        .#{$name}#{$n} {
+            #{$prop}: #{$n}px;
+        }
+    }
+}
+// 定位
+.pr { position: relative; }
+.pa { position: absolute; }
+.pf { position: fixed; }
+.fl { float: left; }
+.fr { float: right; }
+.absolute-center { position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; }
+.clearfix:after { content: ''; display: block; clear: both; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+// 字体
+@for $font-size from 12 to 31 {
+    .f#{$font-size} {
+        font-size: #{$font-size}px
+    }
+}
+// 帧动画
+@keyframes slider-left-in {
+    from {
+        transform: translateX(100%)
+    }
+    to {
+        transform: translateX(0)
+    }
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

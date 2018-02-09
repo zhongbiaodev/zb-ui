@@ -41,6 +41,11 @@ export default {
             type: Array,
             default () { return [] }
         },
+        /**
+         * 可选模式
+         *   tag     标签模式
+         *   list    列表模式
+         */
         mode: {
             type: String,
             default () { return 'tag' }
@@ -235,22 +240,6 @@ export default {
     .multiple-select-body,
     .multiple-select-footer {
         animation: slider-left-in .3s linear reverse;
-    }
-}
-@keyframes slider-left-in {
-    from {
-        transform: translateX(100%)
-    }
-    to {
-        transform: translateX(0)
-    }
-}
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
     }
 }
 </style>
