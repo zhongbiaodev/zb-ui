@@ -220,7 +220,7 @@ export default {
     }
     .multiple-select-footer .reset{
         flex: 1;
-        background-color: #eff1f4;
+        background-color: $color-auxiliary-info;
         color: #576b95;
     }
     .multiple-select-footer .ok{
