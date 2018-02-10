@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    name: 'MultipleSelect',
+    name: 'ZbMultipleSelect',
     props: {
         value: Array,
         /**
@@ -181,6 +181,7 @@ export default {
 </script>
 
 <style lang="scss">
+$color-reset-button: $color-tag-bg;
 .multiple-select {
     position: fixed;
     top: 0;
@@ -220,8 +221,8 @@ export default {
     }
     .multiple-select-footer .reset{
         flex: 1;
-        background-color: $color-auxiliary-info;
-        color: #576b95;
+        background-color: $color-reset-button;
+        color: $color-auxiliary;
     }
     .multiple-select-footer .ok{
         flex: 1;

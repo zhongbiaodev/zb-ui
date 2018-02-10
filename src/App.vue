@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <button @click="show1 = !show1">多选控件-动画-侧滑</button>
+    <zb-button @click.native="show1 = !show1">多选控件-动画-侧滑</zb-button>
     <button class="mt10" @click="show2 = !show2">多选控件无动画</button>
-    <multiple-select
+    <zb-multiple-select
       @on-close="show1 = !show1"
       :animate="true"
-      :show="show1"></multiple-select>
-    <multiple-select
+      :show="show1"></zb-multiple-select>
+    <zb-multiple-select
       @on-close="show2 = !show2"
       :animate="false"
-      :show="show2"></multiple-select>
+      :show="show2"></zb-multiple-select>
   </div>
 </template>
 

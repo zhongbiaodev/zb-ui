@@ -1,7 +1,9 @@
 import MultipleSelect from './MultipleSelect'
+import Button from './Button'
 import lodash from 'lodash'
 const components = [
-  MultipleSelect
+  MultipleSelect,
+  Button
 ]
 
 let plugin = {
