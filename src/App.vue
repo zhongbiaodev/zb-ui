@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <zb-button @click.native="show1 = !show1">多选控件-动画-侧滑</zb-button>
-    <button class="mt10" @click="show2 = !show2">多选控件无动画</button>
+    <zb-button @click="show1 = !show1" :disabled="true">多选控件-动画-侧滑</zb-button>
+    <zb-button class="mt10" @click="show1 = !show1">多选控件-动画-侧滑</zb-button>
+    <zb-button class="mt10" @click="show2 = !show2">多选控件无动画</zb-button>
     <zb-multiple-select
       @on-close="show1 = !show1"
       :animate="true"
@@ -29,11 +30,7 @@ export default {
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 15px;
 }
 
 h1, h2 {

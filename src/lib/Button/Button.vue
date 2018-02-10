@@ -1,5 +1,5 @@
 <template>
-  <div class="zb-button" :class="ClassList">
+  <div class="zb-button" @click="onClick" :class="ClassList">
       <slot></slot>
   </div>
 </template>
@@ -20,6 +20,7 @@ export default {
          *    可选类型
          *      -wechat  微信按钮颜色
          *      -danger  谨慎操作色
+         *      -normal  普通色
          */
         type: {
             type: String,
@@ -44,22 +45,44 @@ export default {
             // 判断按钮的父组件是否为 ButtonGroup
             return vm.$parent.name === 'ButtonGroup'
         }
+    },
+    methods: {
+        onClick (event) {
+            if (this.disabled) {
+                return
+            } else {
+                this.$emit('click', event)
+            }
+        }
     }
 }
 </script>
 
 <style lang="scss">
+$color-wechat: #0f0;
+$color-danger: #f00;
+$color-normal: #ddd;
+$button-colors:
+    wechat $color-wechat #fff,
+    danger $color-danger #fff,
+    normal $color-normal $color-auxiliary,
+    main $color-main #fff,
+;
 .zb-button {
     width: 100%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    // margin-left: -15px;
-    // margin-right: -15px;
+    height: 44px;
+    line-height: 44px;
     text-align: center;
     border-radius: 4px;
-    &.zb-button-main {
-        background: $color-main;
-        color: #fff;
+    box-sizing: border-box;
+    @each $name, $bg, $text in $button-colors {
+        &.zb-button-#{$name} {
+            background: $bg;
+            color: $text;
+        }
+    }
+    &.disabled {
+        opacity: .6;
     }
 }
 </style>
