@@ -5,6 +5,18 @@ html, body, ul, li {
     margin: 0;
     padding: 0;
 }
+// 图标字体
+@font-face {
+  font-family: $icon-font-name;
+  src: url('/src/assets/font/#{$icon-font-filename}.eot');
+  src: url('/src/assets/font/#{$icon-font-filename}.eot?95604958#iefix') format('embedded-opentype'),
+       url('/src/assets/font/#{$icon-font-filename}.woff2?95604958') format('woff2'),
+       url('/src/assets/font/#{$icon-font-filename}.woff?95604958') format('woff'),
+       url('/src/assets/font/#{$icon-font-filename}.ttf?95604958') format('truetype'),
+       url('/src/assets/font/#{$icon-font-filename}.svg?95604958#font_hc_wechat') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 // 0.5高度的边框
 @mixin thin-border ($top-bottom, $left:0) {
     position: relative;

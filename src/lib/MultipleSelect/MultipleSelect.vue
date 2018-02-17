@@ -2,18 +2,23 @@
     <transition :name="animation_name">
     <div
         class="multiple-select"
-        :class="[mode]"
+        :class="modes"
         v-show="show"
         @click="onClose"
         ref="RegisteredCapitalInstance">
         <div class="multiple-select-body" @click="$event.stopPropagation()">
             <div @click="clear()"
-                v-if="noLimit"
+                v-if="action_button_type === 'reset'"
                 class="multiple-select-item"
-                :class="{selected: $lodash.size(result) === 0}">不限</div><div
-                @click="select(item)"
+                :class="{selected: $lodash.size(result) === 0}">{{action_button_label}}</div>
+            <div @click="selectAll()"
+                v-if="action_button_type === 'all'"
+                class="multiple-select-item"
+                :class="{selected: selected_all}">{{action_button_label}}</div>
+            <div @click="select(item)"
                 class="multiple-select-item"
                 :class="{selected: item.selected}"
+                :key="item.label"
                 v-for="item in items">{{item.label}}</div>
         </div>
         <div class="multiple-select-footer" @click="$event.stopPropagation()">
@@ -51,13 +56,30 @@ export default {
             default () { return 'tag' }
         },
         /**
-         * 是否展示不限按钮
-         *     默认展示
+         * 内嵌模式
+         *     若是开启此模式
+         *          - 去除position布局
+         *          - 去除button按钮, 及时响应选择
+         *          - 去除遮罩层
          */
-        noLimit: {
+        inner: {
             type: Boolean,
+            default () { return false}
+        },
+        /**
+         * 配置最前面的功能按钮
+         *     - 允许 String, Array
+         *     - String 则为功能项
+         *         - 可选功能项 reset
+         *         - 可选功能项 all
+         *     - Array 则为配置[功能项, 显示文字]
+         *         - 例: ['all', '全国']
+         *     - 若是空字符串或者空数组则, 不显示按钮
+         */
+        actionButton: {
+            type: Array,
             default () {
-                return true
+                return []
             }
         },
         /**
@@ -96,6 +118,7 @@ export default {
         }
     },
     computed: {
+        // 动画名称
         animation_name () {
             if (!this.animate) {
                 return ''
@@ -107,12 +130,36 @@ export default {
                 }
             }
         },
+        // 返回结果
         result (vm) {
             let r = vm.items.filter(item => item.selected).map(item => item.value)
             return r
         },
-        selectedAll (vm) {
+        // 是否选中了全部选项
+        selected_all (vm) {
             return vm.result.length === vm.items.length
+        },
+        // 选择器模式
+        modes (vm) {
+            let modes = []
+            modes.push(vm.mode)
+            vm.inner && modes.push('inner')
+            return modes
+        },
+        // 功能按钮类型
+        action_button_type (vm) {
+            let type = vm.actionButton[0]
+            return type
+        },
+        // 功能按钮显示的名字
+        action_button_label (vm) {
+            let type = vm.actionButton[0]
+            let types = {
+                'reset': '不限',
+                'all': '全部'
+            }
+            let defaultText = types[type]
+            return vm.actionButton[1] || defaultText
         }
     },
     methods: {
@@ -122,13 +169,23 @@ export default {
             })
         },
         selectAll () {
-            this.items.forEach(item => {
-                item.selected = true
-            })
+            if (this.selected_all) {
+                this.items.forEach(item => {
+                    item.selected = false
+                })
+            } else {
+                this.items.forEach(item => {
+                    item.selected = true
+                })
+            }
         },
         select (item) {
             // if (this.selectedAll) this.clear()
             item.selected = !item.selected
+            // 若是内嵌模式, 即时响应选择
+            if (this.inner) {
+                this.onSelect()
+            }
         },
         onSelect () {
             this.$emit('input', this.result)
@@ -155,8 +212,6 @@ export default {
             } else {
                 dict = all
             }
-            console.log()
-
             this.items = Object.keys(dict).map(item => {
                 return {selected: false, label: dict[item], value: item}
             })
@@ -190,29 +245,66 @@ $color-reset-button: $color-tag-bg;
     bottom: 0;
     z-index: 100;
     background-color: $color-mask;
-    .multiple-select-body {
-        background-color: #fff;
-        padding: 30px 15px 20px;
-        box-sizing: border-box;
-        overflow-x: hidden;
+    &.inner {
+        position: static;
+        background-color: none;
+        .multiple-select-footer {
+            display: none;
+        }
     }
-    .multiple-select-item {
-        background-color: $color-tag-bg;
-        color: $color-multiple-text;
-        padding: 0 10px;
-        display: inline-block;
-        font-size: 14px;
-        box-sizing: border-box;
-        height: 30px;
-        line-height: 30px;
-        margin-right: 15px;
-        margin-bottom: 15px;
-        border-radius: 5px;
+    &.tag {
+        .multiple-select-body {
+            background-color: #fff;
+            padding: 30px 15px 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .multiple-select-item {
+            background-color: $color-tag-bg;
+            color: $color-multiple-text;
+            padding: 0 10px;
+            display: inline-block;
+            font-size: 14px;
+            box-sizing: border-box;
+            height: 30px;
+            line-height: 30px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .multiple-select-item.selected {
+            background-color: $color-main;
+            color: $color-text-selected;
+        }
     }
-    .multiple-select-item.selected {
-        background-color: $color-main;
-        color: $color-text-selected;
+    &.list {
+        .multiple-select-body {
+            background-color: #fff;
+            padding: 30px 15px 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .multiple-select-item {
+            color: #000;
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            @include thin-border(bottom)
+        }
+        .multiple-select-item.selected {
+            color: $color-main;
+            position: relative;
+            &:before {
+                content: $icon-ok-code;
+                font-family: 'font-icon';
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+        }
     }
+    
     .multiple-select-footer {
         display: flex;
         height: 50px;

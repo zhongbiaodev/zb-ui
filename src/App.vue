@@ -2,7 +2,19 @@
   <div id="app">
     <zb-button @click="show1 = !show1" :disabled="true">多选控件-动画-侧滑</zb-button>
     <zb-button class="mt10" @click="show1 = !show1">多选控件-动画-侧滑</zb-button>
-    <zb-button class="mt10" @click="show2 = !show2">多选控件无动画</zb-button>
+    <zb-button class="mt10" @click="show2 = !show2">多选控件-无动画</zb-button>
+    <zb-button class="mt10" @click="show3 = !show3">多选控件-功能按钮-不限</zb-button>
+    <zb-button class="mt10" @click="show4 = !show4">多选控件-功能按钮-全部</zb-button>
+    <div class="mt20 text-center f25">多选控件-内嵌模式</div>
+    <div class="box">
+      <zb-multiple-select
+        :inner="true"
+        mode="list"
+        v-model="model1"
+        :show="true"></zb-multiple-select>
+        <div class="box">{{model1}}</div>
+    </div>
+    <zb-button class="mt10" @click="show5 = !show5">多选控件-无动画</zb-button>
     <zb-multiple-select
       @on-close="show1 = !show1"
       :animate="true"
@@ -11,6 +23,20 @@
       @on-close="show2 = !show2"
       :animate="false"
       :show="show2"></zb-multiple-select>
+    <zb-multiple-select
+      @on-close="show3 = !show3"
+      :animate="true"
+      :action-button="['reset', '自定义不限文字']"
+      :show="show3"></zb-multiple-select>
+    <zb-multiple-select
+      @on-close="show4 = !show4"
+      :animate="true"
+      :action-button="['all', '全部-全选-全国']"
+      :show="show4"></zb-multiple-select>
+    <zb-multiple-select
+      @on-close="show5 = !show5"
+      :animate="true"
+      :show="show5"></zb-multiple-select>
   </div>
 </template>
 
@@ -18,11 +44,12 @@
 export default {
   name: 'app',
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      show1: false,
-      show2: false
+    let obj = {}
+    for (let i = 1; i <= 10; i++) {
+      obj['show' + i] = false
+      obj['model' + i] = []
     }
+    return obj
   }
 }
 </script>
@@ -50,4 +77,5 @@ li {
 a {
   color: #42b983;
 }
+.box { border: 1px solid #ccc;padding: 15px; }
 </style>
