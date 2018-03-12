@@ -19,6 +19,7 @@
     "not ie <= 8"
   ],
   "devDependencies": {
+    "vue-router": "^2.8.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
